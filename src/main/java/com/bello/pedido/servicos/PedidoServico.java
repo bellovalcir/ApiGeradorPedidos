@@ -23,7 +23,7 @@ public class PedidoServico {
 	private PedidoItensRepositorio pedidoItensRepositorio;
 	
 	@Autowired
-//	private EntregaServico entregaServico;
+	private EntregaServico entregaServico;
 	
 	
 	public List<Pedido> findAll() {
@@ -49,6 +49,8 @@ public class PedidoServico {
 			PedidoItens pedidoItens = new PedidoItens(pedido, prod, prod.getValor());
 			pedidoItensRepositorio.save(pedidoItens);
 		}
+		
+		entregaServico.gerarEntrega(pedido);
 			
 		return pedido;
 	}
