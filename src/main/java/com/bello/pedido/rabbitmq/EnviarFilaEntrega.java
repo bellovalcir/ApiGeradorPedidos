@@ -5,6 +5,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.bello.pedido.entidades.Entrega;
+
 @Component
 public class EnviarFilaEntrega {
 	
@@ -14,7 +16,7 @@ public class EnviarFilaEntrega {
     @Autowired
     private Queue queue;
  
-    public void send(String pedido) {
-        this.rabbitTemplate.convertAndSend(this.queue.getName(), pedido);
+    public void send(Entrega entrega) {
+        this.rabbitTemplate.convertAndSend(this.queue.getName(), entrega);
     }
 }

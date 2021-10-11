@@ -17,20 +17,15 @@ public class EntregaServico {
 	@Autowired
 	private EnviarFilaEntrega enviarFilaEntrega;
 	
-	public void enviarFilaEntrega(String filaEntrega) {
-		enviarFilaEntrega.send(filaEntrega);
-	}
-	
 	public void insert(Entrega entrega) {
 		entregaRepositorio.save(entrega);
 	}
 	
 	public void gerarEntrega(Pedido pedido) {
 		Entrega entrega = new Entrega();
+		entrega.setId(pedido.getId());
 		entrega.setEndereco(pedido.getEndereco());
-		entregaRepositorio.save(entrega);
-					
-		String filaEntrega = "Pedido: " + pedido.getId() + " Endereço entrega: " + pedido.getEndereco();
-		enviarFilaEntrega.send(filaEntrega);		
+							
+		enviarFilaEntrega.send(entrega);		
 	}
 }
